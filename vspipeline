@@ -36,6 +36,14 @@ pipeline {
                     sh 'docker build -t 172.31.9.197:8083/spring-boot-app:${BUILD_NUMBER} .'
                 }
             }
+            stage("Push_image_to_nexus") {
+                steps {
+                    withCredentials([string(credentialsId: 'nexuspassword', variable: 'Nexus_passcode')]) {
+                    sh 'docker login -u admin -p ${Nexus_passcode} 172.31.9.197:8083'  
+                    }
+                    sh 'docker push 172.31.9.197:8083/spring-boot-app:${BUILD_NUMBER}'
+                }
+            }
         
     }
 }
