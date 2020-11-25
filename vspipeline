@@ -47,9 +47,6 @@ pipeline {
             stage("deploy_to_k8s_cluster") {
                 steps {
                     sshagent(['k8smaster_ID']) {
-                    withCredentials([string(credentialsId: 'nexuspassword', variable: 'Nexus_passcode')]) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.12.145 docker login -u admin -p ${Nexus_passcode} 172.31.9.197:8083'
-                    }
                     sh 'kubectl apply -f vskubernetes.yml'
                     }
                 }   
