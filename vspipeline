@@ -10,12 +10,11 @@ pipeline {
                url: 'https://github.com/Kubernetesjigalooru/spring-boot-mongo-docker.git' 
             }
         }
-        stages{
-            stage("Maven_Build") {
-                steps {
+        stage("Maven_Build") {
+            steps {
                     sh "mvn clean install"
                 }
             }
-        }
+        
     }
 }
