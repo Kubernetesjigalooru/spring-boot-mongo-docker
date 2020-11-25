@@ -18,7 +18,6 @@ pipeline {
         stage("Push_to Nexus") {
             steps {
                 script {
-                def mavenPom = readMavenPom file: 'pom.xml'
                 nexusArtifactUploader artifacts: [
                     [artifactId: 'spring-boot-starter-parent', 
                     classifier: '', 
@@ -28,7 +27,7 @@ pipeline {
                     nexusUrl: '172.31.9.197:8081', 
                     nexusVersion: 'nexus3', protocol: 'http', 
                     repository: 'project1_release', 
-                    version: '${mavenPom}'
+                    version: '2.1.5.RELEASE'
                 }
             }
         }
