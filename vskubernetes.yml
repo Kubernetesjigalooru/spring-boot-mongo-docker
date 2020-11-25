@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springdeployment
+  labels:
+    app: spring
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchlabels:
+      app: spring
+  template:
+    metadata:
+      name: springpod
+      labels:
+        app: spring
+    spec:
+      containers:
+      - name: springcontaier
+        image: 172.31.9.197:8083/spring-boot-app:10
+        ports:
+        - containerPort: 8282
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  springservice
+spec:
+  selector:
+    app:  spring
+  type: NodePort
+  ports:
+    port:  8282
+    targetPort:  8282
