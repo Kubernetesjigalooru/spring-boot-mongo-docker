@@ -44,6 +44,12 @@ pipeline {
                     sh 'docker push 172.31.9.197:8083/spring-boot-app:${BUILD_NUMBER}'
                 }
             }
+            stage("deploy_to_k8s_cluster") {
+                steps {
+
+                }
+                sh 'kubectl apply -f vskubernetes.yml'
+            }
         
     }
 }
