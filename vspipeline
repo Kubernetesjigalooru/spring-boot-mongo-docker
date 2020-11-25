@@ -46,10 +46,8 @@ pipeline {
             }
             stage("deploy_to_k8s_cluster") {
                 steps {
-
-                }
                 sh 'kubectl apply -f vskubernetes.yml'
             }
-        
+        }
     }
 }
