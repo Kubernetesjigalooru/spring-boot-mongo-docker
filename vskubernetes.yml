@@ -5,15 +5,15 @@ metadata:
   labels:
     app: spring
 spec:
-  replicas: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring
   strategy:
+    type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-    type: RollingUpdate
-  selector:
-    matchlabels:
-      app: spring
   template:
     metadata:
       name: springpod
@@ -21,7 +21,7 @@ spec:
         app: spring
     spec:
       imagePullSecrets:
-        - name: regcred
+      - name: regcred
       containers:
       - name: springcontaier
         image: 172.31.9.197:8083/spring-boot-app:10
@@ -31,11 +31,11 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name:  springservice
+  name: springservice
 spec:
   selector:
-    app:  spring
+    app: spring
   type: NodePort
   ports:
-    port:  8282
-    targetPort:  8282
+  - targetPort: 8282
+    port: 8282
