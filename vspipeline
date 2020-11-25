@@ -30,6 +30,11 @@ pipeline {
                     version: '2.1.5.RELEASE'
                 }
             }
+            stage("Build_image") {
+                steps {
+                    sh 'docker build -t 172.31.9.197:8083/spring-boot-app:${BUILD_NUMBER} .'
+                }
+            }
         }
     }
 }
