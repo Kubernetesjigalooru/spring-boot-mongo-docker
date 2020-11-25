@@ -15,6 +15,20 @@ pipeline {
                     sh "mvn clean install"
                 }
             }
-        
+        stage("Push_to Nexus") {
+            steps {
+                def mavenpom = readMavenPom file: 'pom.xml'
+                nexusArtifactUploader artifacts: [
+                    [artifactId: 'spring-boot-starter-parent', 
+                    classifier: '', 
+                    file: 'target/spring-boot-mongo-1.0.jar', 
+                    type: 'jar']], credentialsId: 'nexusnew', 
+                    groupId: 'org.springframework.boot', 
+                    nexusUrl: '172.31.9.197:8081', 
+                    nexusVersion: 'nexus3', protocol: 'http', 
+                    repository: 'project1_release', 
+                    version: '${mavenpom}'
+            }
+        }
     }
 }
