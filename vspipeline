@@ -1,10 +1,20 @@
 pipeline {
     agent any
+    tools {
+    maven 'Maven-3.6.3'
+    }
     stages {
         stage("SCM_Checkout") {
             steps {
                git credentialsId: 'github_id', 
                url: 'https://github.com/Kubernetesjigalooru/spring-boot-mongo-docker.git' 
+            }
+        }
+        stages{
+            stage("Maven_Build) {
+                steps {
+                    sh "mvn clean install"
+                }
             }
         }
     }
