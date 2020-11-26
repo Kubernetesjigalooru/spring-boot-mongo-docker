@@ -12,6 +12,8 @@ spec:
       labels:
         app: spring
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
       - name: springcontainer
         image: 172.31.9.197:8083/spring-boot-app:17
