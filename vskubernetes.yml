@@ -1,11 +1,17 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: springriplication
+  name: springriplicationiset
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
-    app: spring
+    matchLabels:
+      app: spring
   template:
     metadata:
       name: springpod
