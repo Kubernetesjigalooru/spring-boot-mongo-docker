@@ -25,6 +25,23 @@ spec:
         image: 172.31.9.197:8083/spring-boot-app:17
         ports:
         - containerPort: 8080
+        env:
+          - name: MONGO_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: secretspringmongo
+                key: username
+          - name: MONGO_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: secretspringmongo
+                key: passcode
+          - name: MONGO_DB_HOSTNAME
+            valueFrom:
+              configMapKeyRef:
+                name: springmongoconfig 
+                key: mongodb_url
+                            
 ---
 apiVersion: v1
 kind: Service
