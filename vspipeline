@@ -46,9 +46,9 @@ pipeline {
             }
             stage("deploy_to_k8s_cluster") {
                 steps {
-                    sshagent(['k8smaster_ID']) {
+            
                     sh 'kubectl apply -f vskubernetes.yml'
-                    }
+            
                 }   
             }
         }
