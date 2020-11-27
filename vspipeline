@@ -52,6 +52,12 @@ pipeline {
                     sh 'docker push 172.31.9.197:8083/spring-boot-app:${BUILD_NUMBER}'
                 }
             }
+            stage("configuration") {
+                steps {
+                    sh "kubectl apply -f config_secret.yml"
+                }
+            }
+            
             stage("Deploy To Kuberates Cluster"){
                 steps {
                     /* kubernetesDeploy(
