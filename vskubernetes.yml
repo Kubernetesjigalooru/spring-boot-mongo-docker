@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: springriplicationiset
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -41,6 +41,13 @@ spec:
             configMapKeyRef:
               name: springmongoconfig 
               key: mongodb_url
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
                             
 ---
 apiVersion: v1
@@ -52,9 +59,9 @@ spec:
   selector:
     app: spring
   ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -92,6 +99,13 @@ spec:
             secretKeyRef:
               name: springmongosecret
               key: password
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
@@ -102,6 +116,6 @@ spec:
   selector:
     app: mongo
   ports:
-    - protocol: TCP
-      port: 27017
-      targetPort: 27017
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
