@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: springriplicationiset
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -68,7 +68,7 @@ kind: Deployment
 metadata:
   name: mongodeployment
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
