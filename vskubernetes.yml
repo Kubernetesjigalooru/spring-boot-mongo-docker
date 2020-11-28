@@ -50,14 +50,14 @@ spec:
             cpu: "20m"
         readinessProbe:
           httpGet:
-            path: /spring-boot-mongo-1.0
+            path: 
             port: 31015
           initialDelaySeconds: 15
           timeoutSeconds: 1
           periodSeconds: 60
         livenessProbe:
           httpGet:
-            path: /spring-boot-mongo-1.0
+            path: 
             port: 31015
           initialDelaySeconds: 15
           timeoutSeconds: 1                    
