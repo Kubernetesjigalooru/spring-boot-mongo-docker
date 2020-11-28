@@ -99,17 +99,7 @@ spec:
               key: password   
         volumeMounts:
         - name: mongodb-pvc
-          mountPath: /data/db  
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-      
-        
-           
+          mountPath: /data/db         
 ---
 apiVersion: v1
 kind: Service
