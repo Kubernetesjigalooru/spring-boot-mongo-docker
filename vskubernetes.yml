@@ -41,7 +41,13 @@ spec:
             configMapKeyRef:
               name: springmongoconfig 
               key: mongodb_url
-        
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "10m"
+          limits:
+            memory: "250Mi"
+            cpu: "20m"
                             
 ---
 apiVersion: v1
