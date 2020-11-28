@@ -100,6 +100,14 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+      volumes:
+      - name: mongodb-pvc
+        persistentVolumeClaim:
+         claimName: pvc-hostpath
+        volumeMounts:
+        - name: mongodb-pvc
+          mountPath: /data/db
+           
 ---
 apiVersion: v1
 kind: Service
