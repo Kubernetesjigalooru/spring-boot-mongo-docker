@@ -99,6 +99,13 @@ spec:
         volumeMounts:
         - name: mongodb-pvc
           mountPath: /data/db
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "10m"
+          limits:
+            memory: "250Mi"
+            cpu: "20m"
 ---
 apiVersion: v1
 kind: Service
