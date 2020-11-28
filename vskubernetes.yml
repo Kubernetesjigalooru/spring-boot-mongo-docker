@@ -73,17 +73,16 @@ spec:
       app: mongo
   template:
     metadata:
-      name: mongopod
       labels:
         app: mongo
     spec:
-      containers:
       volumes:
       - name: mongodb-pvc
         persistentVolumeClaim:
           claimName: pvc-hostpath
-      - name: mongocotainer
-        image: mongo
+      containers:
+      - image: mongo
+        name: mongo
         ports:
         - containerPort: 27017
         env:
@@ -96,10 +95,10 @@ spec:
           valueFrom:
             secretKeyRef:
               name: springmongosecret
-              key: password   
+              key: password
         volumeMounts:
         - name: mongodb-pvc
-          mountPath: /data/db         
+          mountPath: /data/db
 ---
 apiVersion: v1
 kind: Service
@@ -110,6 +109,6 @@ spec:
   selector:
     app: mongo
   ports:
-  - protocol: TCP
-    port: 27017
-    targetPort: 27017
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
