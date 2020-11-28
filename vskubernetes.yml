@@ -78,6 +78,10 @@ spec:
         app: mongo
     spec:
       containers:
+      volumes:
+      - name: mongodb-pvc
+        persistentVolumeClaim:
+          claimName: pvc-hostpath
       - name: mongocotainer
         image: mongo
         ports:
@@ -92,11 +96,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: springmongosecret
-              key: password
-      volumes:
-      - name: mongodb-pvc
-        persistentVolumeClaim:
-          claimName: pvc-hostpath
+              key: password   
         volumeMounts:
         - name: mongodb-pvc
           mountPath: /data/db  
