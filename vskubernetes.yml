@@ -78,6 +78,10 @@ spec:
         app: mongo
     spec:
       containers:
+      volumes:
+      - name: mongodb-pvc
+        persistentVolumeClaim:
+         claimName: pvc-hostpath
       - name: mongocotainer
         image: mongo
         ports:
@@ -93,6 +97,9 @@ spec:
             secretKeyRef:
               name: springmongosecret
               key: password
+        volumeMounts:
+        - name: mongodb-pvc
+          mountPath: /data/db
         resources:
           requests:
             memory: "64Mi"
@@ -100,13 +107,8 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
-      volumes:
-      - name: mongodb-pvc
-        persistentVolumeClaim:
-         claimName: pvc-hostpath
-        volumeMounts:
-        - name: mongodb-pvc
-          mountPath: /data/db
+      
+        
            
 ---
 apiVersion: v1
