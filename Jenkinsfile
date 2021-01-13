@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+    maven 'Mave-3.6.3'
+    }
     stages {
         stage("SCM_checkout") {
             steps {
